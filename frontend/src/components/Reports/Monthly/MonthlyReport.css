@@ -1,0 +1,197 @@
+.daily-report, .monthly-report {
+    max-width: 900px;
+    margin-left: 100px;
+    /* margin: 0 auto; */
+    width: 100%;
+}
+
+.report-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-left: 3rem;
+    width: 950px;
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(231, 234, 240, 0.7);
+}
+
+.report-header h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.date-picker, .select-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* margin-bottom: 1.5rem; */
+}
+
+.date-picker label, .select-container label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.date-picker input, .select-container select {
+    padding: 0.8rem;
+    border: 1px solid rgba(231, 234, 240, 0.7);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.date-picker input:focus, .select-container select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.building-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.building-table th,
+.building-table td {
+    border: 1px solid rgba(231, 234, 240, 0.7);
+    padding: 1rem;
+    text-align: left;
+}
+
+.building-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.total {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.total p {
+    margin: 0.5rem 0;
+}
+
+.update-button, .print-button {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.update-button:hover, .print-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+.update-button:active, .print-button:active {
+    transform: translateY(0);
+}
+
+.delete-button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-button:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+}
+
+.delete-button:active {
+    transform: translateY(0);
+}
+
+/* Month/Year selector specific styles */
+.filters-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select-input {
+    padding: 0.8rem;
+    border: 1px solid rgba(231, 234, 240, 0.7);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2c3e50;
+    min-width: 200px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.select-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .daily-report, .monthly-report {
+        padding: 1rem;
+    }
+
+    .report-card {
+        padding: 1.5rem;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .filters-container {
+        flex-direction: column;
+    }
+
+    .select-group {
+        width: 100%;
+    }
+
+    .select-input {
+        width: 100%;
+    }
+
+    .building-table {
+        overflow-x: auto;
+    }
+}

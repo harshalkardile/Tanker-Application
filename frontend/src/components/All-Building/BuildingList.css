@@ -1,0 +1,165 @@
+/* Table Styling */
+.building-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #ffffff; /* white background for the table */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
+    border-radius: 8px; /* rounded corners */
+}
+
+.building-table th, .building-table td {
+    border: 1px solid rgba(231, 234, 240, 0.7);
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.9rem; /* slightly smaller font for readability */
+    color: #4e5d6d; /* soft gray color for text */
+}
+
+.building-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #3a3f47; /* darker text for headers */
+    border-top: 3px solid #f1f1f1; /* accent border for header */
+}
+
+.building-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* subtle alternating row color */
+}
+
+.building-table tr:hover {
+    background-color: #f1f1f1; /* hover effect for rows */
+}
+
+.report-container {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.report-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-left: 3rem;
+    width: 1000px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+.report-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(231, 234, 240, 0.9);
+}
+
+.report-header h2 {
+    color: #2c3e50;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.report-table th, .report-table td {
+    border: 1px solid rgba(231, 234, 240, 0.9);
+    padding: 1rem;
+    text-align: left;
+}
+
+.report-table th {
+    background: #f8f9fa;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.print-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.print-button:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+.no-data {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #7d8790;
+    margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .report-container {
+        padding: 1rem;
+    }
+
+    .report-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Button Styling */
+.updatebutton, .deletebutton {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-align: center;
+}
+
+.updatebutton {
+    background-color: #33c8d9;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 6px rgba(50, 217, 192, 0.3); /* shadow effect */
+}
+
+.updatebutton:hover {
+    background-color: #2dc8d9;
+    transform: translateY(-2px); /* subtle lift on hover */
+    box-shadow: 0 4px 8px rgba(26, 204, 231, 0.4); /* deeper shadow on hover */
+}
+
+.deletebutton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3); /* shadow effect */
+}
+
+.deletebutton:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px); /* subtle lift on hover */
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4); /* deeper shadow on hover */
+}
+
+/* Optional: Focus state for buttons */
+.updatebutton:focus, .deletebutton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 210, 94, 0.5); /* glow effect on focus */
+}

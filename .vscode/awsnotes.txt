@@ -1,0 +1,372 @@
+-------------------------------------------
+LECT 1
+-------------------------------------------
+Cloud computing is on demand delivery of 
+compute power, database storage, application
+and other IT resources through a cloud service 
+platform via internet with pay-as-you-go model
+
+capex(capital expenditure)
+
+capex includes in house servers 
+(AD Server, DNS, Application), A/C, Swtiches, Cabeling, 
+Router, Gateway, firwall, electricity. 
+it reduces captial expenditure 
+flexiblity to use cloud on demand for example
+filpkart big billion day ind vs australlia mathces 
+
+opex(operational expenditure)
+
+opex includes hiring employess to work on maintains of servers
+no need of hiring employess to work on 
+cloud data centers to maintance
+as we dont have to pay salary to them so theres is no operational expenditure
+
+
+TOP cloud players
+1) Aws,
+2) Microsoft azure,
+3) GCP.
+4) Alibaba cloud.
+5) Oracle, VMware, Fujitsu, IBM.
+
+Aws
+
+Charctristics of cloud
+1) On demand self service -- anywhere and anytime access of data for ex gmail account custom increase of can be done
+2) Broad network acess -- can be accessed from anywhere in network only need of internet
+3) Scalability    -- flixibility grow and shrink on demand
+4) resource Pooling -- pooling of resourses aggeregatively will be used as per need ( 500 individual water bottles together in pool).
+5) Measured Services -- kind of analysis on data based on sales, matchces, traffic filteration based on male female most buyed products
+
+2003 pinhan published research paper
+AWS lauched in 2006
+2013 certification lauched
+2015,2016 profit doubled
+2017 reinvent AI
+
+-------------------------------------------
+LECT 2
+-------------------------------------------
+
+services in cloud 
+
+IAAS
+infrasturcute as service 
+PAAS
+Platform as a service
+SAAS 
+Software As a service
+
+
+cloud model
+-------------------
+| application     |                     SAAS         
+-------------------                    
+|  data           |                     SAAS         
+-------------------                                              
+|  runtime        |             PAAS    SAAS            
+-------------------                          
+|  middleware     |             PAAS    SAAS           
+-------------------                         
+|  os             |             PAAS    SAAS    
+-------------------                    
+|  virtualization |     IAAS    PAAS    SAAS
+-------------------    
+|  server         |     IAAS    PAAS    SAAS
+-------------------                     
+|  storage        |     IAAS    PAAS    SAAS
+-------------------                     
+|  network        |     IAAS    PAAS    SAAS
+-------------------                     
+
+Deployement model in cloud
+
+1-> public cloud  (aws, azure, google) 
+2-> private cloud (Enterprise cloud) made by specific company for their 
+    requirements morely for securing confidential information
+3-> hybrid cloud  (azure and aws hybrid) combination of both public and private cloud azure provides this models
+
+
+virtualization
+
+cloud
+--------------------
+|                  |
+|  virtualised     |
+|   | server  |    |
+|   | storage |    |
+|   | Network |    |
+|                  |
+--------------------
+
+hypervisor - it is used for virtualization
+
+microsoft hypervisor - hyperv
+Aws hypervisor       - citrix
+Vmvware hypervisor   - vsphere EXSI 
+
+with help of virtualization cloud is being made
+
+---------------------------------------------
+LECT 3 Based on account creation on AWS
+-------------------------------------------
+
+-------------------------------------------
+LECT 4
+-------------------------------------------
+Theory on Elastic cloud compute ie. EC2
+
+virtual machine and ec2 is the same thing 
+
+EC2 provides scalable compouting capacity in the aws cloud 
+using Amazon EC2 eliminates your need to invest in hardware up front
+so one can develop and deploy application
+
+ec2 enables you you to scale up or scale down to handle changes in requirements or 
+spikes in popularity, reducing your need to forcast traffic
+
+virtual server, virtual machine and virtual instance is same thing
+
+
+one can use aws ec2 to lauch as many and as few virtual server as per need, 
+configure security and networking and manage storage
+
+Amazon EC2 anables scale up or scale down instances
+
+Amazon EC2 is having two storage options ebs ( elastic block store ) located somewhere
+else and instance store based on memory under host it fast and non persistent data can be deleted
+
+preconfigured templates are there knows as amazon machine images such as ubuntu, windows, amazon linux
+
+by default when one create ec2 instaces with amazon your account it limited to a maximum of 20 ec2 instances
+per ec2 region with two default high input output instaces. one need to request amazon for more instances
+
+Types of ec2 
+
+there are total 7 types of ec2 6 important
+
+1) general purpose -> series T, M, A
+2) compute optimized -> series C
+3) memory optimized -> series R, X, Z
+4) storage optimized -> series I, D, H
+5) accelerated computing/ gpu -> 
+6) High memory optimized
+7) previous genration 
+
+general purpose 
+USECASE: balanced of memory and cpu resources
+
+compute optimized
+USECASE: more cpu power than ram
+
+memory optimized
+USECASE: more ram than cpu
+
+storage optimized
+USECASE more storage than cpu and ram and low latency
+
+accelerated computing/ gpu
+USECASE: graphic optimized
+
+High memory optimized
+USECASE High ram than cpu based on nitro system
+
+previous genration
+USECASE: previous genration
+
+-------------------------------------------
+LECT 5
+-------------------------------------------
+
+EC2 part 2
+
+
+general purpose instaces
+
+    M Series T Series and A Series
+
+    general pusrpose instances provide a balance of compute, memory and networking resources,
+    and can be used for a variety of diverse workloads. for example, small and medium databases,
+    data processing, and backend servers.
+
+M Series T Series and A Series are general purpose instances
+
+M Series
+    m4, m5, m5a, m5ad, m5d.
+    Types
+      large
+
+    Mostly used M4, M5, m5a
+    M4 -> The new m4 instaces features a custom Intel xeon e5-2676 v3 haswell processor optimized specifically for EC2   
+        vCPU -> 2 to 40 (max)
+        Memory(RAM) -> 8 to 160 GB
+        Storage -> EBS only
+        Network -> Up to 10 Gbps
+
+    M5, M5a, m5ad, m5d -> These instaces provide an ideal cloud infra, offering a balance of compute, memory, and networking resources 
+    for broad range of application
+
+    Range of application:
+    Used in web and application servers, gaming servers, backend servers for enterprise applications, and for testing and development environments.
+        vCPU -> 2 to 96 (max)
+        Memory(RAM) -> 8 to 384 GB
+        Instace Storage -> EBS and NVMe SSD
+        Network -> Up to 25 Gbps
+    
+A Series
+    a1
+    Types
+       medium, large
+
+    A1 -> A1 instaces are ideally suited for scale out workloads that are ideally 
+    supported by the arm architecture.
+
+    Instaces are well suited for 
+        web servers -- web servers are used to host websites
+        containerized microservices -- works on docker based containers
+        caching fleets  -- caching of data running multipe ec2 instances
+        distrubuted data stores -- data stored in multiple locations
+
+T Series
+    t2 t2.micro(Free tier), t3, t3a
+    Types
+        nano, micro, small, medium, large, xlarge, 2xlarge
+    
+    T2, T3 and T3a instaces
+
+    These instaces provide a baseline level of CPU performance 
+    with the ability to burst to a higher level when required by your workload.
+    
+    baseline meaning  5% to 40% of CPU performance
+
+    Used when testing and development environments, low traffic websites and web 
+    applications, microservices, and small databases.
+
+    vCPU -> 1 to 8 (max)
+    Memory(RAM) -> 0.5 to 32 GB
+    Instace Storage -> EBS only
+    Network -> Up to 5 Gbps
+
+
+-------------------------------------------
+LECT 6
+-------------------------------------------
+
+compute optimized instances
+
+    C Series
+
+    compute optimized instances are ideal for compute-bound 
+    applications that benefit from high-performance 
+    processors.
+    
+    Instances are well suited for 
+    batch processing workloads 
+    media transcoding
+    high performance web servers
+    high performance computing (HPC)
+    scientific modeling
+    dedicated gaming servers
+    ad serving.
+
+    C Series
+        c4, c5, c5n
+        c3 previous genration
+
+        Types
+            large, xlarge, 2xlarge, 4xlarge, 8xlarge, 9xlarge, 10xlarge, 12xlarge, 16xlarge, 18xlarge
+        
+        C4 -> C4 instaces are optimized for compute-intensive workloads and 
+            deliver very cost efficient high performance at a low price per compute ratio.
+
+        vCPU -> 2 to 36 (max)   
+        Memory(RAM) -> 3.75 to 144 GB
+        Instace Storage -> EBS only
+        Network -> Up to 10 Gbps
+
+        C5 -> C5 instaces are the latest compute optimized instaces and are 
+            built on the latest generation of Intel Xeon processors.
+        powered by aws nitro system
+
+        vCPU -> 2 to 72 (max)
+        Memory(RAM) -> 4 to 192 GB
+        Instace Storage -> EBS or NVMe SSD
+        Network -> Up to 25 Gbps
+
+        Note: C5 support max 25EBS volumes
+              C5 use Elastic Network Adapter (ENA) for better network performance
+              C5 uses new ec2 hypervisor
+
+-------------------------------------------
+LECT 7
+-------------------------------------------
+
+Memory optimized instaces
+
+    R Series X Series Z Series
+
+    Memory optimized instances are designed to deliver fast
+    performance for workloads that process large data sets 
+    in memory.
+    
+    Instances are well suited for
+        high performance databases
+        distributed web scale in-memory caches
+        real time big data analytics
+        HPC and scientific computing
+        memory intensive workloads
+    
+    R Series
+        R4, R5, R5a, R5ad, R5d
+
+        Types
+            large, xlarge, 2xlarge, 4xlarge, 8xlarge, 12xlarge, 16xlarge
+
+        high performance, relational (Mysql) and non relational nosql (mongodb)  databases.
+        distributed web scale in-memory caches key value stores
+        used for finacial services applications, hadoop.
+
+        vCPU -> 2 to 96 (max)
+        Memory(RAM) -> 16 to 768 GB
+        Instace Storage -> EBS or NVMe SSD
+    
+    X Series
+        x1, x1e
+
+        Types
+            xlarge, 2xlarge, 4xlarge, 8xlarge, 16xlarge, 32xlarge
+
+        well suited for high performance database,
+        memory intensive enterprise application, relational database workloads,
+        SAP Hana.
+        electronic design automanufacturing (EDA) workloads.
+
+        vCPU -> 4 to 128 (max)
+        Memory(RAM) -> 122 to 3904 GB
+        Instace Storage -> NVMe SSD
+
+
+    Z Series
+        z1d
+
+        Types
+            large, xlarge, 2xlarge, 3xlarge, 6xlarge
+        
+        high frequency z1d provides a sustained all core frequency of up to 4.0 GHz,
+        the fastest of any cloud instance.
+        AWS Nitro System, Xeon processors, upto 1.8 TB of Instace storage.
+
+        vCPU -> 2 to 48 (max)
+        Memory(RAM) -> 16 to 384 GB
+        Instace Storage -> NVMe SSD
+
+-------------------------------------------
+LECT 8
+-------------------------------------------
+
+Storage optimized instaces
+
+    I Series D Series H Series
+
+

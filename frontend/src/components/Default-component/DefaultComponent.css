@@ -1,0 +1,131 @@
+/* Container to center the content */
+.default-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+}
+
+/* Card Style */
+.default-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    text-align: center;
+    width: 113.8vh;
+    height: auto;
+    max-width: 1000px;
+}
+
+/* Tanker Image Style */
+.tanker-img {
+    width: 100%;
+    max-width: 300px;
+    height: 40vh;
+    width: 40vh;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.company-name {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Poppins', sans-serif, 'Noto Sans Devanagari', 'Times New Roman', Times, serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adds shadow for a more 3D look */
+    
+    /* Gradient color text */
+    background: linear-gradient(45deg, #4294e7, #4ff2c9, #039dd5); /* Gradient colors: Red to Orange to Yellow */
+    -webkit-background-clip: text;  /* Ensures the gradient applies to the text */
+    color: transparent; /* Makes the actual text color transparent so the gradient shows */
+}
+
+/* KPI Container with Responsive Layout */
+.kpi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin: 2rem 0;
+    justify-content: center;
+}
+
+/* KPI Box Style */
+.kpi-box {
+    background: #f9f9f9; /* Soft Background */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle Gradient Overlay */
+.kpi-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(173, 216, 230, 0.2), rgba(144, 238, 144, 0.2));
+    opacity: 0.5;
+    z-index: -1;
+}
+
+/* Hover Effects */
+.kpi-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* KPI Title */
+.kpi-box h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+/* KPI Value */
+.kpi-box p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2a9d8f; /* Soothing Green */
+    margin: 0;
+}
+
+/* KPI Icon */
+.kpi-icon {
+    font-size: 36px;
+    color: #577590; /* Soft Blue */
+    margin-bottom: 12px;
+}
+
+
+.date-time {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(45deg, #007bff, #6610f2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+}
+
+.date-time:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+}
+

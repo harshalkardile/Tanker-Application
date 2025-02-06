@@ -1,0 +1,84 @@
+/* .reports-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.report-type-selector {
+    margin-bottom: 20px;
+}
+
+.report-type-selector button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.report-type-selector button:hover {
+    background-color: #0056b3;
+}
+
+.date-picker {
+    margin-bottom: 20px;
+}
+
+.date-picker label {
+    font-weight: bold;
+}
+
+.date-picker input {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.deliveries-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.deliveries-table th,
+.deliveries-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.deliveries-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.delivery-row {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delivery-row:hover {
+    background-color: #f9f9f9;
+}
+
+.details-row td {
+    background-color: #fafafa;
+    padding: 15px;
+}
+
+.details {
+    margin-left: 20px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+} */
