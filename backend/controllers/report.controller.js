@@ -129,6 +129,7 @@ exports.getMonthlyReport = async (req, res) => {
         const totalMonthlyTankers = formattedReport.reduce((sum, building) => sum + building.totalTankers, 0);
         const totalMonthlyCost = formattedReport.reduce((sum, building) => sum + building.totalCost, 0);
 
+        
         res.status(200).json({ monthlyReport: formattedReport, totalMonthlyTankers, totalMonthlyCost });
     } catch (error) {
         console.error("Error fetching monthly report:", error);

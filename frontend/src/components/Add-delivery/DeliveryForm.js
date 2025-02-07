@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { addDelivery, getBuildings } from '../../api';
-import { Truck, Building, FileText, Clock, Calendar, Droplet, IndianRupee, Droplets  } from 'lucide-react';
+import { Truck, Building, FileText, Clock, Calendar, Droplet, IndianRupee, Droplets } from 'lucide-react';
 import './DeliveryForm.css';
 
 const DeliveryForm = () => {
@@ -9,13 +9,13 @@ const DeliveryForm = () => {
         invoiceNumber: '',
         timeOfDelivery: 'Morning',
         numberOfTankers: '',
-        selectedDate: '', // New field for the optional calendar
-        tankerSize: '5000', // New field for tanker size
-        price: '', // New field for price
+        selectedDate: '',
+        tankerSize: '5000',
+        price: '',
     });
 
     const [buildings, setBuildings] = useState([]);
-    const [prices, setPrices] = useState([]);
+    const [availablePrices, setAvailablePrices] = useState([]);
 
     useEffect(() => {
         const fetchBuildings = async () => {
@@ -26,27 +26,14 @@ const DeliveryForm = () => {
                 console.error('Failed to fetch buildings:', error);
             }
         };
-
         fetchBuildings();
     }, []);
 
-    const handleBuildingChange = async (e) => {
+    const handleBuildingChange = (e) => {
         const { value } = e.target;
-        setFormData({
-            ...formData,
-            buildingId: value,
-            price: '', // Reset price when building changes
-        });
-
-        if (value) {
-            try {
-                const response = await getBuildings(value);
-                console.log(response.data);
-                setPrices(response.data);
-            } catch (error) {
-                console.error('Failed to fetch prices for building:', error);
-            }
-        }
+        const selectedBuilding = buildings.find(building => building._id === value);
+        setFormData({ ...formData, buildingId: value, price: '' });
+        setAvailablePrices(selectedBuilding ? selectedBuilding.chargePerTanker : []);
     };
 
     const handleChange = (e) => {
@@ -62,7 +49,7 @@ const DeliveryForm = () => {
         try {
             const deliveryData = {
                 ...formData,
-                date: formData.selectedDate ? formData.selectedDate : new Date().toISOString().split('T')[0], // Use selected date if provided
+                date: formData.selectedDate ? formData.selectedDate : new Date().toISOString().split('T')[0],
                 numberOfTankers: Number(formData.numberOfTankers),
             };
             await addDelivery(deliveryData);
@@ -76,6 +63,7 @@ const DeliveryForm = () => {
                 tankerSize: '5000',
                 price: '',
             });
+            setAvailablePrices([]);
         } catch (error) {
             console.error('Failed to add delivery:', error);
             alert('Failed to add delivery. Please try again.');
@@ -105,17 +93,16 @@ const DeliveryForm = () => {
                         </div>
                     </div>
 
-                    {/* Price Dropdown */}
-                    {formData.buildingId && (
+                    {availablePrices.length > 0 && (
                         <div className="form-group">
                             <label>Price:</label>
                             <div className="input-wrapper">
                                 <IndianRupee size={20} />
                                 <select name="price" value={formData.price} onChange={handleChange} required>
                                     <option value="">Select Price</option>
-                                    {prices.map((price) => (
-                                        <option key={price._id} value={price.amount}>
-                                            {price.amount} per delivery
+                                    {availablePrices.map((price, index) => (
+                                        <option key={index} value={price}>
+                                            {price} per delivery
                                         </option>
                                     ))}
                                 </select>
@@ -146,12 +133,11 @@ const DeliveryForm = () => {
                     <div className="form-group">
                         <label>Number of Tankers:</label>
                         <div className="input-wrapper">
-                            <Droplets  size={20} />
+                            <Droplets size={20} />
                             <input type="number" name="numberOfTankers" value={formData.numberOfTankers} onChange={handleChange} placeholder="Enter Number of Tankers" required />
                         </div>
                     </div>
 
-                    {/* New Date Picker */}
                     <div className="form-group">
                         <label>Select Delivery Date (Optional):</label>
                         <div className="input-wrapper">
@@ -160,7 +146,6 @@ const DeliveryForm = () => {
                         </div>
                     </div>
 
-                    {/* Tanker Size Dropdown */}
                     <div className="form-group">
                         <label>Select Tanker Size:</label>
                         <div className="input-wrapper">

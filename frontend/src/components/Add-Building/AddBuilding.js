@@ -73,23 +73,26 @@ const AddBuilding = () => {
 
                     <div className="form-group">
                         <label>Charge Per Tanker</label>
-                        <div className="input-wrapper">
-                            <IndianRupee size={20} />
-                            <input
-                                type="number"
-                                value={priceInput}
-                                onChange={(e) => setPriceInput(e.target.value)}
-                                placeholder="Enter charge per tanker"
-                            />
-                            
-                        </div>
-                        <button type="button" className="add-price-button" onClick={handleAddPrice}>
+                        <div className="input-group">
+                            <div className="input-wrapper">
+                                <IndianRupee size={20} />
+                                <input
+                                    type="number"
+                                    value={priceInput}
+                                    onChange={(e) => setPriceInput(e.target.value)}
+                                    placeholder="Enter charge per tanker"
+                                />
+                            </div>
+                            <button type="button" className="add-price-button" onClick={handleAddPrice}>
                                 <Plus size={20} />
                             </button>
+                        </div>
+                   
+                       
                         <ul className="price-list">
                             {chargePerTanker.map((price, index) => (
                                 <li key={index} className="price-item">
-                                    {price} 
+                                    ₹{price} 
                                     <button type="button" className="remove-price-button" onClick={() => handleRemovePrice(index)}>
                                         <Trash size={16} />
                                     </button>

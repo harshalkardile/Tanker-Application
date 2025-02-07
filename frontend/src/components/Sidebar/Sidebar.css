@@ -60,7 +60,7 @@
   }
   
   .submenu {
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     padding-left: 1rem;
   }
   
@@ -69,6 +69,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 0.1rem;
     padding: 0.8rem 1rem;
     border: none;
     background: transparent;
