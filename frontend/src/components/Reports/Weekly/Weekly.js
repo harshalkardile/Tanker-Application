@@ -149,7 +149,7 @@ const Weekly  = () => {
             <h2>Weekly Report</h2>
             <div className="date-picker">
             <div className='first-date'>
-            <label htmlFor="datePicker">Start Date </label>
+            <label htmlFor="datePicker">Start Date : </label>
                 <input
                     type="date"
                     id="datePicker"
@@ -158,7 +158,7 @@ const Weekly  = () => {
                 />
             </div>
             <div className='first-date'>
-            <label htmlFor="datePicker">End Date </label>
+            <label htmlFor="datePicker">End Date : </label>
                 <input
                     type="date"
                     id="datePicker"
@@ -168,7 +168,7 @@ const Weekly  = () => {
                
             </div>
             </div>
-            <button className="generate-rp" onClick={() => fetchWeeklyReport(startDate, endDate)}>Generate Report</button>
+            <button className="submit-button" onClick={() => fetchWeeklyReport(startDate, endDate)}>Generate Report</button>
             
             {weeklyReport && (
                 <div>

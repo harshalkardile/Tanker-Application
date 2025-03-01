@@ -1,107 +1,126 @@
 /* Table Styling */
 .building-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin-top: 1rem;
-    background-color: #ffffff; /* white background for the table */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
-    border-radius: 8px; /* rounded corners */
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .building-table th, .building-table td {
-    border: 1px solid rgba(231, 234, 240, 0.7);
     padding: 1rem;
     text-align: left;
-    font-size: 0.9rem; /* slightly smaller font for readability */
-    color: #4e5d6d; /* soft gray color for text */
+    font-size: 0.95rem;
+    color: #34495e; /* Darker text for better contrast */
 }
 
 .building-table th {
-    background: #f8f9fa;
-    font-weight: 600;
-    color: #3a3f47; /* darker text for headers */
-    border-top: 3px solid #f1f1f1; /* accent border for header */
+    background: linear-gradient(135deg, #f8f9fa, #e3e8ef);
+    font-weight: 700;
+    color: #2c3e50;
+    border-bottom: 3px solid #d1d9e6;
 }
 
 .building-table tr:nth-child(even) {
-    background-color: #f9f9f9; /* subtle alternating row color */
+    background-color: #f6f9fc; /* Soft alternating row colors */
 }
 
 .building-table tr:hover {
-    background-color: #f1f1f1; /* hover effect for rows */
+    background-color: #ecf3fa;
+    transition: background 0.3s ease-in-out;
 }
 
+/* Container Styling */
 .report-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+    padding: 1rem;
 }
 
 .report-card {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     padding: 2rem;
-    margin-left: 3rem;
-    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
     transition: all 0.3s ease-in-out;
 }
 
-
-
+/* Header Styling */
 .report-header {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(231, 234, 240, 0.9);
+    border-bottom: 3px solid rgba(220, 220, 220, 0.7);
 }
 
 .report-header h2 {
     color: #2c3e50;
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
 }
 
+/* Table Styling */
 .report-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin-top: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
     overflow: hidden;
 }
 
 .report-table th, .report-table td {
-    border: 1px solid rgba(231, 234, 240, 0.9);
     padding: 1rem;
     text-align: left;
+    font-size: 0.95rem;
 }
 
 .report-table th {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #dfe7f3, #dfe7f3);
     font-weight: 700;
     color: #2c3e50;
+    border-bottom: 2px solid #d4dbe7;
 }
 
+.report-table tr:hover {
+    background-color: #f3f7fb;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Print Button */
 .print-button {
-    background: #3498db;
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
 }
 
 .print-button:hover {
-    background: #2980b9;
+    background: linear-gradient(135deg, #2980b9, #1f6690);
     transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
 }
 
+/* No Data Message */
 .no-data {
     text-align: center;
     font-size: 1.2rem;
@@ -119,47 +138,56 @@
     .report-card {
         padding: 1.5rem;
     }
+
+    .report-header h2 {
+        font-size: 1.5rem;
+    }
 }
 
 /* Button Styling */
 .updatebutton, .deletebutton {
     padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border-radius: 8px;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    border: none;
 }
 
+/* Update Button */
 .updatebutton {
-    background-color: #33c8d9;
+    background: linear-gradient(135deg, #33c8d9, #2ba0b6);
     color: white;
-    border: none;
-    box-shadow: 0 2px 6px rgba(50, 217, 192, 0.3); /* shadow effect */
+    box-shadow: 0 3px 8px rgba(50, 217, 192, 0.4);
 }
 
 .updatebutton:hover {
-    background-color: #2dc8d9;
-    transform: translateY(-2px); /* subtle lift on hover */
-    box-shadow: 0 4px 8px rgba(26, 204, 231, 0.4); /* deeper shadow on hover */
+    background: linear-gradient(135deg, #2ba0b6, #1f8898);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(26, 204, 231, 0.5);
 }
 
+/* Delete Button */
 .deletebutton {
-    background-color: #e74c3c;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
     color: white;
-    border: none;
-    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3); /* shadow effect */
+    box-shadow: 0 3px 8px rgba(231, 76, 60, 0.4);
 }
 
 .deletebutton:hover {
-    background-color: #c0392b;
-    transform: translateY(-2px); /* subtle lift on hover */
-    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4); /* deeper shadow on hover */
+    background: linear-gradient(135deg, #c0392b, #a83224);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.5);
 }
 
-/* Optional: Focus state for buttons */
+/* Focus State */
 .updatebutton:focus, .deletebutton:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 210, 94, 0.5); /* glow effect on focus */
+    box-shadow: 0 0 0 3px rgba(255, 210, 94, 0.5);
 }

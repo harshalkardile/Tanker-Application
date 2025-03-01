@@ -2,7 +2,7 @@ import React from 'react';
 
 const PrintReportButton = ({ onPrint }) => {
     return (
-        <button className='generate-rp' onClick={onPrint}>Print Report</button>
+        <button className="submit-button" onClick={onPrint}>Print Report</button>
     );
 };
 

@@ -9,3 +9,5 @@ export const getDeliveriesByDate = (date) => axios.get(`${API_URL}/deliveries/${
 export const getWeeklyReport = () => axios.get(`${API_URL}/reports/weekly`);
 export const getMonthlyReport = () => axios.get(`${API_URL}/reports/monthly`);
 export const getYearlyReport = () => axios.get(`${API_URL}/reports/yearly`);
+export const getAllDeliveries = () => axios.get(`${API_URL}/deliveries`);
+export const deleteDelivery = (id) => axios.delete(`${API_URL}/deliveries/${id}`);

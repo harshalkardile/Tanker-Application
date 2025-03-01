@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getBuildings } from '../../api';
-import { Building } from 'lucide-react';
+import { Building, FilePenLine, Trash } from 'lucide-react';
 import './BuildingList.css';
 
 const BuildingList = () => {
@@ -50,8 +50,8 @@ const BuildingList = () => {
                                             ? building.chargePerTanker.join(" | ₹") 
                                             : building.chargePerTanker[0]}
                                     </td>
-                                    <td><button className="updatebutton">Update</button></td>
-                                    <td><button className="deletebutton">Delete</button></td>
+                                    <td><button className="updatebutton"><FilePenLine size={20}/></button></td>
+                                    <td><button className="deletebutton"><Trash size={20}/></button></td>
                                 </tr>
                             ))}
                         </tbody>

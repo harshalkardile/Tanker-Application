@@ -65,6 +65,33 @@ exports.addDelivery = async (req, res) => {
   }
 };
 
+// Get all deliveries
+exports.getAllDeliveries = async (req, res) => {
+  try {
+    // Fetch all deliveries and populate building details
+    const deliveries = await Delivery.find().populate('buildingId');
+    
+    // If no deliveries found, return empty array
+    if (!deliveries.length) {
+      return res.status(200).json([]);
+    }
+
+    // Format each delivery to include calculated totalCost
+    const formattedDeliveries = deliveries.map(delivery => {
+      const totalCost = delivery.numberOfTankers * (delivery.price || 0);
+      return {
+        ...delivery.toObject(),
+        totalCost,
+      };
+    });
+
+    res.status(200).json(formattedDeliveries);
+  } catch (error) {
+    console.error("Error fetching all deliveries:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // Get deliveries by date
 exports.getDeliveriesByDate = async (req, res) => {
   try {
@@ -94,6 +121,28 @@ exports.getDeliveriesByDate = async (req, res) => {
       res.status(500).json({ message: "Internal server error" });
   }
 };
+
+// Delete a delivery by ID
+exports.deleteDeliveryById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(req.params)
+
+    // Find and delete the delivery
+    const deletedDelivery = await Delivery.findByIdAndDelete(id);
+
+    // If the delivery is not found, return 404
+    if (!deletedDelivery) {
+      return res.status(404).json({ message: "Delivery not found" });
+    }
+
+    res.status(200).json({ message: "Delivery deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting delivery:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 
   
   

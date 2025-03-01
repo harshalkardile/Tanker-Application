@@ -152,7 +152,7 @@ const Monthly = () => {
             <div>
             <div className="date-picker">
             <div className='first-date'>
-            <label htmlFor="datePicker">Month </label>
+            <label htmlFor="datePicker">Month : </label>
                     <select value={selectedMonth} onChange={handleMonthChange}>
                         <option value="">Select Month</option>
                         {[
@@ -166,7 +166,7 @@ const Monthly = () => {
                     </select>
                 </div>
                 <div>
-                <label htmlFor="datePicker">Year </label>
+                <label htmlFor="datePicker">Year : </label>
                     <select value={selectedYear} onChange={handleYearChange}>
                         <option value="">Select Year</option>
                         {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i).map((year) => (
@@ -178,7 +178,7 @@ const Monthly = () => {
                 </div>
             </div>
             </div>
-            <button className='generate-rp' onClick={() => fetchMonthlyReport(selectedMonth, selectedYear)}>Generate Report</button>
+            <button className="submit-button"  onClick={() => fetchMonthlyReport(selectedMonth, selectedYear)}>Generate Report</button>
             
             {monthlyReport && (
                 <div>

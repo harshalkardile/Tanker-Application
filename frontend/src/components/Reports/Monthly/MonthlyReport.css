@@ -30,26 +30,48 @@
     margin: 0;
 }
 
-.date-picker, .select-container {
+.date-picker {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 3rem;
     /* margin-bottom: 1.5rem; */
 }
 
-.date-picker label, .select-container label {
+.date-picker label  {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+.date-picker select{
     font-size: 1rem;
     font-weight: 500;
     color: #4a5568;
 }
 
-.date-picker input, .select-container select {
+.date-picker input {
     padding: 0.8rem;
     border: 1px solid rgba(231, 234, 240, 0.7);
     border-radius: 8px;
     font-size: 1rem;
+    width: 18rem;
     color: #2c3e50;
     transition: all 0.3s ease;
+}
+
+.date-picker select {
+    padding: 0.8rem;
+    border: 1px solid rgba(231, 234, 240, 0.7);
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 18rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.date-picker select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .date-picker input:focus, .select-container select:focus {

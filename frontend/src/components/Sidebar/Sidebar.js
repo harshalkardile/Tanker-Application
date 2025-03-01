@@ -153,6 +153,7 @@ import React, { useState } from 'react';
 import { Building, Truck, BarChart2, Plus, List, Calendar } from 'lucide-react';
 import AddBuilding from '../Add-Building/AddBuilding';
 import BuildingList from '../All-Building/BuildingList';
+import AllDeliveries from '../All-Building/AllDeliveries';
 import DeliveryForm from '../Add-delivery/DeliveryForm';
 import Monthly from '../Reports/Monthly/Monthly';
 import Weekly from '../Reports/Weekly/Weekly';
@@ -180,6 +181,9 @@ const Sidebar = () => {
         break;
       case 'add-delivery':
         setActiveContent(<DeliveryForm />);
+        break;
+      case 'show-deliveries':
+        setActiveContent(<AllDeliveries />);
         break;
       case 'daily':
         setActiveContent(<Daily />);
@@ -227,6 +231,10 @@ const Sidebar = () => {
               <button className={`submenu-item ${activeTab === 'add-delivery' ? 'active' : ''}`} onClick={() => handleTabClick('add-delivery')}>
                 <Plus size={16} />
                 <span>Add Delivery</span>
+              </button>
+              <button className={`submenu-item ${activeTab === 'show-deliveries' ? 'active' : ''}`} onClick={() => handleTabClick('show-deliveries')}>
+                <List size={16} />
+                <span>Show Deliveries</span>
               </button>
             </div>
           )}

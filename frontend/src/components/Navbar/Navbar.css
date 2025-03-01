@@ -29,12 +29,13 @@
 }
 
 .navbar-title {
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight:800;
   color: #333;
   text-align: center;
   flex-grow: 1;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+  font-family: 'Lucida Grande', Verdana, sans-serif;
 }
 
 .profile-button {
