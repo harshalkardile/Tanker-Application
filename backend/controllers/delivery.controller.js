@@ -4,7 +4,7 @@ const Building = require('../models/Building');
 // Add a new delivery
 exports.addDelivery = async (req, res) => {
   try {
-    const { buildingId, invoiceNumber, timeOfDelivery, numberOfTankers, tankerSize, price } = req.body;
+    const { buildingId, invoiceNumber, timeOfDelivery, numberOfTankers, tankerSize, price, date } = req.body;
 
     // Validate required fields
     if (!buildingId || !invoiceNumber || !timeOfDelivery || !numberOfTankers || !tankerSize) {
@@ -28,7 +28,6 @@ exports.addDelivery = async (req, res) => {
       return res.status(404).json({ message: 'Building not found' });
     }
 
-    console.log(price);
     // Default price to the first chargePerTanker if not provided or invalid
     let validPrice = price;
     if (!validPrice || isNaN(validPrice)) {
@@ -52,7 +51,7 @@ exports.addDelivery = async (req, res) => {
       tankerSize,
       totalCost,
       price: validPrice,
-      date: new Date().toISOString().split('T')[0], // Automatically set the current date
+      date: date || new Date().toISOString().split('T')[0], // Use selected date or default to current date
     });
 
     // Save the delivery to the database

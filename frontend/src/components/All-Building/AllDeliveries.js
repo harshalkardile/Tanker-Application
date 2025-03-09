@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllDeliveries, deleteDelivery } from '../../api';
 import { Truck, FilePenLine, Trash } from 'lucide-react';
-// import UpdateDelivery from '../Add-delivery/UpdateDelivery';
 import './BuildingList.css';
 
 const AllDeliveries = () => {
@@ -53,6 +52,9 @@ const AllDeliveries = () => {
                     <Truck size={24} />
                     <h2>Deliveries</h2>
                 </div>
+                <div className="total-count">
+                    <p>Total Deliveries: {deliveries.length}</p> {/* Show total deliveries count */}
+                </div>
                 {loading ? (
                     <p className="loading-message">Loading deliveries...</p>
                 ) : deliveries.length > 0 ? (
@@ -100,8 +102,6 @@ const AllDeliveries = () => {
                     <p className="no-data">No deliveries found.</p>
                 )}
             </div>
-
-            {/* {selectedDelivery && <UpdateDelivery delivery={selectedDelivery} onUpdateSuccess={handleUpdateSuccess} />} */}
         </div>
     );
 };

@@ -11,22 +11,34 @@ const Monthly = () => {
     const [selectedYear, setSelectedYear] = useState('');
     const [monthlyReport, setMonthlyReport] = useState(null);
     const [expandedDeliveryId, setExpandedDeliveryId] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [validationError, setValidationError] = useState('');
 
     const fetchMonthlyReport = async (month, year) => {
         try {
             const response = await axios.get(`${API_URL}/reports/monthly?month=${month}&year=${year}`);
-            setMonthlyReport(response.data);
+            if (response.data && response.data.monthlyReport && response.data.monthlyReport.length > 0) {
+                setMonthlyReport(response.data);
+                setErrorMessage(''); // Clear error message if data is found
+            } else {
+                setMonthlyReport(null);
+                setErrorMessage('No data available for the selected month and year.');
+            }
         } catch (error) {
             console.error('Failed to fetch monthly report:', error);
+            setMonthlyReport(null);
+            setErrorMessage('Failed to fetch report. Please try again later.');
         }
     };
 
     const handleMonthChange = (event) => {
         setSelectedMonth(event.target.value);
+        setValidationError(''); // Clear validation error on change
     };
 
     const handleYearChange = (event) => {
         setSelectedYear(event.target.value);
+        setValidationError(''); // Clear validation error on change
     };
 
     const toggleExpand = (deliveryId) => {
@@ -35,8 +47,8 @@ const Monthly = () => {
 
     const handlePrintReport = () => {
         const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-            <!DOCTYPE html>
+        printWindow.document.write(
+            `<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -111,7 +123,6 @@ const Monthly = () => {
                     <table>
                         <thead>
                              <tr>
-                            
                                 <th>Society Name</th>
                                 <th>Invoice Numbers</th>
                                 <th>Total Trips</th>
@@ -120,16 +131,14 @@ const Monthly = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            ${monthlyReport?.monthlyReport.map(report => `
-                               <tr>
-                                      
+                            ${monthlyReport?.monthlyReport?.map((report) => 
+                               `<tr>
                                     <td>${report.buildingDetails.name}</td>
                                     <td>${report.deliveries.map(delivery => delivery.invoiceNumber).join(', ')}</td>
                                     <td>${report.deliveries.length}</td>
                                     <td>${report.totalTankers}</td>
                                     <td>₹${report.totalCost}</td>
-                                </tr>
-                            `).join('')}
+                                </tr>`).join('')}
                         </tbody>
                     </table>
                     <div class="total-section">
@@ -138,62 +147,68 @@ const Monthly = () => {
                     </div>
                 </div>
             </body>
-            </html>
-        `);
+            </html>`
+        );
         printWindow.document.close();
         printWindow.print();
     };
 
+    const handleGenerateReport = () => {
+        if (!selectedMonth || !selectedYear) {
+            setValidationError('Please select both Month and Year.');
+            return;
+        }
+
+        fetchMonthlyReport(selectedMonth, selectedYear);
+    };
+
     return (
-        // <div className="monthly-report">
         <div className="form-container">
-        <div className="form-card">
-            <h2>Monthly Report</h2>
-            <div>
-            <div className="date-picker">
-            <div className='first-date'>
-            <label htmlFor="datePicker">Month : </label>
-                    <select value={selectedMonth} onChange={handleMonthChange}>
-                        <option value="">Select Month</option>
-                        {[
-                            "January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-                        ].map((month, index) => (
-                            <option key={index} value={index + 1}>
-                                {month}
-                            </option>
-                        ))}
-                    </select>
+            <div className="form-card">
+                <h2>Monthly Report</h2>
+                <div className="date-picker">
+                    <div className="first-date">
+                        <label htmlFor="datePicker">Preferred Month: </label>
+                        <select value={selectedMonth} onChange={handleMonthChange}>
+                            <option value="">Select Month</option>
+                            {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((month, index) => (
+                                <option key={index} value={index + 1}>
+                                    {month}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="datePicker">Preferred Year: </label>
+                        <select value={selectedYear} onChange={handleYearChange}>
+                            <option value="">Select Year</option>
+                            {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-                <div>
-                <label htmlFor="datePicker">Year : </label>
-                    <select value={selectedYear} onChange={handleYearChange}>
-                        <option value="">Select Year</option>
-                        {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <button className="submit-button" onClick={handleGenerateReport}>Generate Report</button>
+
+                {validationError && <div className="error-message">{validationError}</div>}
+
+                {errorMessage && !validationError && <div className="error-message">{errorMessage}</div>}
+
+                {monthlyReport && !errorMessage && (
+                    <div>
+                        <DeliveryTable
+                            deliveries={monthlyReport?.monthlyReport}
+                            toggleExpand={toggleExpand}
+                            expandedDeliveryId={expandedDeliveryId}
+                            reportType="monthly"
+                            monthlyReport={monthlyReport}
+                        />
+                        <PrintReportButton onPrint={handlePrintReport} />
+                    </div>
+                )}
             </div>
-            </div>
-            <button className="submit-button"  onClick={() => fetchMonthlyReport(selectedMonth, selectedYear)}>Generate Report</button>
-            
-            {monthlyReport && (
-                <div>
-                    <DeliveryTable
-                        deliveries={monthlyReport.monthlyReport}
-                        toggleExpand={toggleExpand}
-                        expandedDeliveryId={expandedDeliveryId}
-                        reportType="monthly"
-                        monthlyReport={monthlyReport}
-                    />
-                   
-                    <PrintReportButton onPrint={handlePrintReport} />
-                </div>
-            )}
-        </div>
         </div>
     );
 };

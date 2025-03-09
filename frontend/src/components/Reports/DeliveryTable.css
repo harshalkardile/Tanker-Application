@@ -26,6 +26,29 @@
     /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; */
 }
 
+
+.print-button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.print-button:hover {
+    background: linear-gradient(135deg, #2980b9, #1f6690);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+}
+
+
 /* Header */
 .deliveries-table thead {
     background: linear-gradient(to right, #2563eb, #3b82f6);

@@ -5,21 +5,45 @@ import './WeeklyReport.css';
 import DeliveryTable from '../DeliveryTable';
 import PrintReportButton from '../PrintReportButton';
 
-const Weekly  = () => {
+const Weekly = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [weeklyReport, setWeeklyReport] = useState(null);
     const [expandedDeliveryId, setExpandedDeliveryId] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
+    // Function to fetch the weekly report
     const fetchWeeklyReport = async (start, end) => {
+        if (!start || !end) {
+            setErrorMessage('Please select both start and end dates.');
+            return;
+        }
+
+        const startDateObj = new Date(start);
+        const endDateObj = new Date(end);
+
+        if (endDateObj < startDateObj) {
+            setErrorMessage('End date cannot be earlier than start date.');
+            return;
+        }
+
         try {
             const response = await axios.get(`${API_URL}/reports/weekly?startDate=${start}&endDate=${end}`);
-            setWeeklyReport(response.data);
+            if (response.data && response.data.weeklyReport && response.data.weeklyReport.length > 0) {
+                setWeeklyReport(response.data);
+                setErrorMessage(''); // Clear error message if data is found
+            } else {
+                setWeeklyReport(null);
+                setErrorMessage('No data available for the selected week.');
+            }
         } catch (error) {
             console.error('Failed to fetch weekly report:', error);
+            setWeeklyReport(null);
+            setErrorMessage('Failed to fetch report. Please try again later.');
         }
     };
 
+    // Event handlers for date inputs
     const handleStartDateChange = (e) => {
         setStartDate(e.target.value);
     };
@@ -108,9 +132,8 @@ const Weekly  = () => {
                         <p>Period: ${startDate} to ${endDate}</p>
                     </div>
                     <table>
-                       <thead>
+                        <thead>
                             <tr>
-                            
                                 <th>Society Name</th>
                                 <th>Invoice Numbers</th>
                                 <th>Total Trips</th>
@@ -121,7 +144,6 @@ const Weekly  = () => {
                         <tbody>
                             ${weeklyReport?.weeklyReport.map(report => `
                                 <tr>
-                                      
                                     <td>${report.buildingDetails.name}</td>
                                     <td>${report.deliveries.map(delivery => delivery.invoiceNumber).join(', ')}</td>
                                     <td>${report.deliveries.length}</td>
@@ -145,48 +167,47 @@ const Weekly  = () => {
 
     return (
         <div className="form-container">
-        <div className="form-card">
-            <h2>Weekly Report</h2>
-            <div className="date-picker">
-            <div className='first-date'>
-            <label htmlFor="datePicker">Start Date : </label>
-                <input
-                    type="date"
-                    id="datePicker"
-                    value={startDate}
-                    onChange={handleStartDateChange}
-                />
-            </div>
-            <div className='first-date'>
-            <label htmlFor="datePicker">End Date : </label>
-                <input
-                    type="date"
-                    id="datePicker"
-                    value={endDate}
-                    onChange={handleEndDateChange}
-                />
-               
-            </div>
-            </div>
-            <button className="submit-button" onClick={() => fetchWeeklyReport(startDate, endDate)}>Generate Report</button>
-            
-            {weeklyReport && (
-                <div>
-                    <DeliveryTable
-                        deliveries={weeklyReport.weeklyReport}
-                        toggleExpand={toggleExpand}
-                        expandedDeliveryId={expandedDeliveryId}
-                        reportType="weekly"
-                        weeklyReport={weeklyReport}
-                    />
-                   
-                    <PrintReportButton onPrint={handlePrintReport} />
+            <div className="form-card">
+                <h2>Weekly Report</h2>
+                <div className="date-picker">
+                    <div className='first-date'>
+                        <label htmlFor="startDate">Start Date: </label>
+                        <input
+                            type="date"
+                            id="startDate"
+                            value={startDate}
+                            onChange={handleStartDateChange}
+                        />
+                    </div>
+                    <div className='first-date'>
+                        <label htmlFor="endDate">End Date: </label>
+                        <input
+                            type="date"
+                            id="endDate"
+                            value={endDate}
+                            onChange={handleEndDateChange}
+                        />
+                    </div>
                 </div>
-            )}
+                <button className="submit-button" onClick={() => fetchWeeklyReport(startDate, endDate)}>Generate Report</button>
+                
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+                {weeklyReport && !errorMessage && (
+                    <div>
+                        <DeliveryTable
+                            deliveries={weeklyReport.weeklyReport}
+                            toggleExpand={toggleExpand}
+                            expandedDeliveryId={expandedDeliveryId}
+                            reportType="weekly"
+                            weeklyReport={weeklyReport}
+                        />
+                        <PrintReportButton onPrint={handlePrintReport} />
+                    </div>
+                )}
+            </div>
         </div>
-        </div>
-        
     );
 };
 
-export default Weekly
+export default Weekly;

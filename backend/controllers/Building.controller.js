@@ -29,3 +29,24 @@ exports.getAllBuildings = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Delete a building by ID
+exports.deleteBuildingById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(req.params);
+
+    // Find and delete the building by ID
+    const deletedBuilding = await Building.findByIdAndDelete(id);
+
+    // If the building is not found, return 404
+    if (!deletedBuilding) {
+      return res.status(404).json({ message: "Building not found" });
+    }
+
+    res.status(200).json({ message: "Building deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting building:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

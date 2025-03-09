@@ -49,7 +49,7 @@ const DeliveryForm = () => {
         try {
             const deliveryData = {
                 ...formData,
-                date: formData.selectedDate ? formData.selectedDate : new Date().toISOString().split('T')[0],
+                date: formData.selectedDate ? formData.selectedDate : new Date().toISOString().split('T')[0], // Check selectedDate, if empty, use current date
                 numberOfTankers: Number(formData.numberOfTankers),
             };
             await addDelivery(deliveryData);

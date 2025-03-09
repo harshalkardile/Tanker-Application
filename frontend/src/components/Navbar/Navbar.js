@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { User } from 'lucide-react';
 import './Navbar.css';
-import Maharaj from './tankericon.png';
-import { useNavigate } from 'react-router-dom'; // Correct hook to use for navigation in react-router-dom v6
+// import Tanker from '../Navbar/tanker.png';
+
+import Maharaj from '../Default-component/dnyaneshwarmaharaj.png';
+import { useNavigate } from 'react-router-dom';
+import {DefaultComponent} from '../Default-component/DefaultComponent';
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);

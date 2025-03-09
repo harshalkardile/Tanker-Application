@@ -24,6 +24,48 @@
     border-bottom: 3px solid #d1d9e6;
 }
 
+
+/* Table Styling */
+.building-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.building-table th, .building-table td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #34495e; /* Darker text for better contrast */
+}
+
+.building-table th {
+    background: linear-gradient(135deg, #f8f9fa, #e3e8ef);
+    font-weight: 700;
+    color: #2c3e50;
+    border-bottom: 3px solid #d1d9e6;
+}
+
+/* Sticky header */
+.building-table th {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Wrapper Styling */
+.table-wrapper {
+    max-height: 500px; /* Set a max height for the scrollable area */
+    overflow-y: auto; /* Enables vertical scrolling */
+}
+
 .building-table tr:nth-child(even) {
     background-color: #f6f9fc; /* Soft alternating row colors */
 }
@@ -32,6 +74,7 @@
     background-color: #ecf3fa;
     transition: background 0.3s ease-in-out;
 }
+
 
 /* Container Styling */
 .report-container {
@@ -62,6 +105,16 @@
     border-bottom: 3px solid rgba(220, 220, 220, 0.7);
 }
 
+/* Sticky header */
+.report-table thead {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
 .report-header h2 {
     color: #2c3e50;
     font-size: 1.8rem;
@@ -78,6 +131,9 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
     overflow: hidden;
+    display: block; /* This makes the table scrollable */
+    max-height: 500px; /* Set a max height for scrolling */
+    overflow-y: auto; /* Enables vertical scrolling */
 }
 
 .report-table th, .report-table td {
