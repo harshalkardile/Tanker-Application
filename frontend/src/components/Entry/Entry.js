@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
-import './Login.css';
+import './Entry.css';
 
-const Login = () => {
+const Entry = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -11,11 +11,15 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false); // Form submission state
   const navigate = useNavigate();
 
+  // Load admin credentials from environment variables
+  const adminUsername = process.env.REACT_APP_ADMIN_USERNAME;
+  const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
+
   // Simulate initial page loading (e.g., fetching resources or doing some background tasks)
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false); // After 3 seconds, stop the loading animation and show the form
-    }, 1500); // Simulate loading for 3 seconds
+      setIsLoading(false); // After 1.5 seconds, stop the loading animation and show the form
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -29,10 +33,10 @@ const Login = () => {
     setError('');
 
     try {
-      if (formData.username === 'admin' && formData.password === 'password') {
+      if (formData.username === adminUsername && formData.password === adminPassword) {
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
-        
+
         // Set authentication state
         localStorage.setItem('authenticated', 'true');
         navigate('/', { replace: true });
@@ -89,6 +93,7 @@ const Login = () => {
                       className="toggle-password"
                       onClick={() => setShowPassword(!showPassword)}
                       disabled={isSubmitting}
+                      aria-label="Toggle password visibility"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
@@ -110,4 +115,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Entry;

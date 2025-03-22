@@ -127,6 +127,15 @@ const Reports = () => {
                         margin: 0;
                         font-size: 24px;
                     }
+                    .logo-title {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 10px;
+                    }
+                    .logo-title img {
+                        margin-right: 15px;
+                    }
                     .report-container {
                         max-width: 1000px;
                         margin: auto;
@@ -166,13 +175,28 @@ const Reports = () => {
                         border-top: 1px solid #ddd;
                         padding-top: 20px;
                     }
+                    .invoice-numbers {
+                        margin: 20px 0;
+                    }
+                    .invoice-row {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-bottom: 10px;
+                    }
+                    .invoice-item {
+                        margin-right: 15px;
+                        font-size: 14px;
+                    }
                 </style>
             </head>
             <body>
                 <div class="report-container">
                     <div class="company-header">
-                        <h1>Water Tank Supply Co.</h1>
-                        <p>123 Water Street, Mumbai, India</p>
+                        <div class="logo-title">
+                            <img src="/api/placeholder/100/100" alt="Company Logo" />
+                            <h1>Shree Yogiraj Water Supplier</h1>
+                        </div>
+                        <p>Sr. No. - 140/1 Tathawade Dist Pune - 411033</p>
                         <p>Contact: +91 123-456-7890</p>
                     </div>
                     <div class="report-header">
@@ -180,9 +204,27 @@ const Reports = () => {
                         <p>Date: ${new Date().toLocaleDateString()}</p>
                     </div>
                     ${reportType === 'daily' ? `
+                        <div class="invoice-numbers">
+                            <h3>Invoice Numbers:</h3>
+                            ${(() => {
+                                const invoiceRows = [];
+                                for (let i = 0; i < deliveries.length; i += 5) {
+                                    const rowInvoices = deliveries.slice(i, i + 5);
+                                    invoiceRows.push(`
+                                        <div class="invoice-row">
+                                            ${rowInvoices.map(delivery => `
+                                                <div class="invoice-item">${delivery.invoiceNumber}</div>
+                                            `).join('')}
+                                        </div>
+                                    `);
+                                }
+                                return invoiceRows.join('');
+                            })()}
+                        </div>
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Sr. No.</th>
                                     <th>Society Name</th>
                                     <th>Invoice Number</th>
                                     <th>Time of Delivery</th>
@@ -191,8 +233,9 @@ const Reports = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                ${deliveries.map(delivery => `
+                                ${deliveries.map((delivery, index) => `
                                     <tr>
+                                        <td>${index + 1}</td>
                                         <td>${delivery.buildingId.name}</td>
                                         <td>${delivery.invoiceNumber}</td>
                                         <td>${delivery.timeOfDelivery}</td>
@@ -210,14 +253,16 @@ const Reports = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Sr. No.</th>
                                     <th>Society Name</th>
                                     <th>Number of Tankers</th>
                                     <th>Total Cost</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                ${weeklyReport.weeklyReport.map(report => `
+                                ${weeklyReport.weeklyReport.map((report, index) => `
                                     <tr>
+                                        <td>${index + 1}</td>
                                         <td>${report.buildingDetails.name}</td>
                                         <td>${report.totalTankers}</td>
                                         <td>₹${report.totalCost}</td>
@@ -233,6 +278,7 @@ const Reports = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Sr. No.</th>
                                     <th>Society Name</th>
                                     <th>Number of Tankers</th>
                                     <th>Total Cost</th>
@@ -240,9 +286,9 @@ const Reports = () => {
                             </thead>
                             <tbody>
                                 ${console.log(monthlyReport)}
-                              <tbody>
-                                ${monthlyReport.monthlyReport.map(report => `
+                                ${monthlyReport.monthlyReport.map((report, index) => `
                                     <tr>
+                                        <td>${index + 1}</td>
                                         <td>${report.buildingDetails.name}</td>
                                         <td>${report.totalTankers}</td>
                                         <td>₹${report.totalCost}</td>
@@ -258,6 +304,7 @@ const Reports = () => {
                     <div class="footer">
                         <p>Thank you for your business!</p>
                         <p>For any queries, please contact: support@watertanksupply.com</p>
+                        <p>GPay Number: +91 123-456-7890</p>
                     </div>
                 </div>
             </body>

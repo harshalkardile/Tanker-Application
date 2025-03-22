@@ -43,15 +43,32 @@ input, select, textarea {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+
+
 button {
-  /* padding: 10px 20px; */
-  background-color: #4066ff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+  padding:7px 15px;
+  background-color: #4a67d6; /* Muted blue */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #00ecd1; /* Slightly darker blue */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  background-color: #62e0ec; /* Deeper shade for pressed state */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 /* 
 button:hover {

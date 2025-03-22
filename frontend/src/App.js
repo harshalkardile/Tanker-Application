@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
-import Login from './components/Login/Login';
+import Entry from './components/Entry/Entry';
 
 const PrivateRoute = ({ children }) => {
   const isAuthenticated = localStorage.getItem('authenticated') === 'true';
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Login" element={<Entry />} />
         <Route 
           path="/" 
           element={

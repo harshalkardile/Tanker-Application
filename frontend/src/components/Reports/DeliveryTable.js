@@ -1,196 +1,302 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {Printer} from 'lucide-react';
 import './DeliveryTable.css';
+import Maharaj from '../Default-component/dnyaneshwarmaharaj.png';
 
 const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportType, weeklyReport, monthlyReport }) => {
     const [invoiceIdCounter, setInvoiceIdCounter] = useState(1005); // Initial invoice ID
+
+    // Ensure the invoice ID is persistent across sessions
+    useEffect(() => {
+        const lastInvoiceId = localStorage.getItem('lastInvoiceId');
+        if (lastInvoiceId) {
+            setInvoiceIdCounter(Number(lastInvoiceId));
+        }
+    }, []);
 
     const calculateTotals = (data) => {
         const totalTankers = data.reduce((sum, delivery) => sum + delivery.numberOfTankers, 0);
         const totalCost = data.reduce((sum, delivery) => sum + delivery.totalCost, 0);
         return { totalTankers, totalCost };
     };
-
     const handlePrintReport = (report) => {
         const totalTankers = report.deliveries.reduce((sum, delivery) => sum + delivery.numberOfTankers, 0);
         const totalCost = report.deliveries.reduce((sum, delivery) => sum + delivery.totalCost, 0);
-
+    
         const reportDate = new Date(report.date);
-        const monthName = reportDate.toLocaleString('default', { month: 'long' });
-        const year = reportDate.getFullYear();
-
-        // Increment Invoice ID
-        setInvoiceIdCounter(prev => prev + 1);
-
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Report</title>
-              
-                <style>
-                    @page {
-                        size: A4;
-                        margin: 15mm; /* Adjusted margin for more space */
-                    }
-                    body {
-                        font-family: 'Arial', sans-serif;
-                        margin: 0;
-                        padding: 0;
-                        background-color: #f4f6f9;
-                        font-size: 12px;
-                    }
-                    .invoice-container {
-                        width: 100%;
-                        max-width: 700px; /* Further reduced max-width for better fitting */
-                        margin: 0 auto;
-                        padding: 20px;
-                        background: #ffffff;
-                        border-radius: 8px;
-                        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-                    }
-                    .invoice-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 15px;
-                        border-bottom: 2px solid #ddd;
-                        padding-bottom: 8px;
-                    }
-                    .invoice-header h1 {
-                        font-size: 20px; /* Increased header font size */
-                        color: #333;
-                        margin: 0;
-                        text-transform: uppercase;
-                        font-weight: bold;
-                    }
-                    .invoice-header .invoice-id {
-                        font-size: 14px;
-                        font-weight: bold;
-                        color: #000;
-                    }
-                    .invoice-header p {
-                        font-size: 12px;
-                        color: #777;
-                        margin: 5px 0;
-                    }
-                    .invoice-header .date {
-                        font-size: 12px;
-                        color: #777;
-                        text-align: right;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin-top: 15px;
-                        font-size: 10px;
-                    }
-                    th, td {
-                        border: 1px solid #ddd;
-                        padding: 6px;
-                        text-align: left;
-                    }
-                    th {
-                        font-size: 14px; /* Increased font size for table headers */
-                        background-color: #f7f7f7;
-                        font-weight: bold;
-                        color: #333;
-                    }
-                    td {
-                        font-size: 12px; /* Increased font size for table data */
-                        background-color: #fafafa;
-                    }
-                    .total-info {
-                        text-align: right;
-                        font-size: 13px; /* Increased font size for total text */
-                        font-weight: bold;
-                        color: #333;
-                        margin-top: 15px;
-                        border-top: 2px solid #ddd;
-                        padding-top: 10px;
-                    }
-                    .bank-details {
-                        font-size: 10px;
-                        margin-top: 20px;
-                        padding-top: 15px;
-                        border-top: 1px solid #ddd;
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 15px;
-                    }
-                    .bank-details div {
-                        display: flex;
-                        flex-direction: column;
-                    }
-                    .bank-details div p {
-                        margin: 3px 0;
-                        color: #555;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="invoice-container">
-                    <!-- Invoice Header -->
-                    <div class="invoice-header">
-                        <div>
-                            <h1>Report</h1>
-                            <p><strong>Building Name:</strong> ${report.buildingDetails.name}</p>
-                            <p><strong>Month/Year:</strong> ${monthName} ${year}</p>
+    
+        // Get today's date for issue date
+        const today = new Date();
+        const issueDate = today.toLocaleDateString();
+    
+        // Increment Invoice ID using state update
+        setInvoiceIdCounter(prev => {
+            const newInvoiceId = prev + 1;
+            localStorage.setItem('lastInvoiceId', newInvoiceId);  // Save to localStorage (or sessionStorage) to persist the ID across sessions
+            return newInvoiceId;
+        });
+    
+        // Create an image element and load the image URL
+        const imgUrl = Maharaj;
+        const img = new Image();
+        img.src = imgUrl;
+    
+        img.onload = () => {
+            // Once the image is loaded, create the print window
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${reportType === 'monthly' ? 'Monthly Report' : 'Weekly Report'}</title>
+                    <style>
+                        @page {
+                            size: A4;
+                            margin: 15mm;
+                        }
+                        body {
+                            font-family: 'Arial', sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            background-color: #f4f6f9;
+                            font-size: 12px;
+                        }
+                        .invoice-container {
+                            width: 100%;
+                            max-width: 700px;
+                            margin: 0 auto;
+                            padding: 20px;
+                            background: #ffffff;
+                            border-radius: 8px;
+                            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                        }
+                        .logo-title {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-bottom: 10px;
+                        }
+                        .logo-title img {
+                            margin-top:10px;
+                            margin-right: 25px;
+                            height: 80px;
+                            width: auto;
+                        }
+                        .company-name {
+                            text-align: center;
+                            font-size: 22px;
+                            font-weight: bold;
+                            color: #333;
+                            margin-bottom: 2px;
+                        }
+                        .company-address {
+                            text-align: center;
+                            margin-right: 18px;
+                            font-size: 12px;
+                            color: #555;
+                            margin-top:-10px;
+                            margin-bottom: 10px;
+                        }
+                        .report-title {
+                            text-align: center;
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #333;
+                            margin-bottom: 20px;
+                            text-transform: uppercase;
+                        }
+                        .invoice-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 15px;
+                            border-bottom: 2px solid #ddd;
+                            padding-bottom: 8px;
+                        }
+                        .invoice-header h1 {
+                            font-size: 20px;
+                            color: #333;
+                            margin: 0;
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
+                        .invoice-header p {
+                            font-size: 12px;
+                            color: #777;
+                            margin: 5px 0;
+                        }
+                        .invoice-header .date {
+                            font-size: 12px;
+                            color: #777;
+                            text-align: right;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 15px;
+                            font-size: 10px;
+                            table-layout: fixed;
+                        }
+                        th, td {
+                            border: 1px solid #ddd;
+                            padding: 6px;
+                            text-align: left;
+                            word-wrap: break-word;
+                        }
+                        th {
+                            font-size: 14px;
+                            background-color: #f7f7f7;
+                            font-weight: bold;
+                            color: #333;
+                        }
+                        td {
+                            font-size: 12px;
+                            background-color: #fafafa;
+                        }
+                        .total-info {
+                            text-align: right;
+                            font-size: 13px;
+                            font-weight: bold;
+                            color: #333;
+                            margin-top: 15px;
+                            border-top: 2px solid #ddd;
+                            padding-top: 10px;
+                        }
+                        .bank-details {
+                            font-size: 10px;
+                            margin-top: 20px;
+                            padding-top: 15px;
+                            border-top: 1px solid #ddd;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 15px;
+                        }
+                        .bank-details div {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                        .bank-details div p {
+                            margin: 3px 0;
+                            color: #555;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="invoice-container">
+                        <!-- Company Logo and Name -->
+                        <div class="logo-title">
+                            <img src="${imgUrl}" alt="Dnyaneshwar Maharaj" />
+                            <div>
+                                <div class="company-name">
+                                    <p>Shree Yogiraj Water Supplier</p>
+                                </div>
+                                <div class="company-address">
+                                    <p>Sr. No. - 140/1 Tathawade Dist Pune - 411033</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="invoice-id">Invoice ID: ${invoiceIdCounter}</p> <!-- Invoice ID on top right -->
+    
+                        <!-- Report Type (Monthly/Weekly) -->
+                        <div class="report-title">
+                            <p>${reportType === 'monthly' ? 'Monthly Report' : 'Weekly Report'}</p>
                         </div>
-                    </div>
-
-                    <!-- Invoice Table -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Time of Delivery</th>
-                                <th>Invoice Number</th>
-                                <th>Number of Tankers</th>
-                                <th>Total Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${report.deliveries.map((delivery) => `
+    
+                        <!-- Invoice Header -->
+                        <div class="invoice-header">
+                            <div>
+                                <p><strong>Building Name:</strong> ${report.buildingDetails.name}</p>
+                            </div>
+                            <div>
+                                <p class="invoice-id">Invoice ID: ${invoiceIdCounter}</p>
+                                <p><strong>Issue Date:</strong> ${new Date(issueDate).toLocaleDateString('en-IN')}</p>
+                            </div>
+                        </div>
+    
+                        <!-- Delivery Table -->
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>${new Date(delivery.date).toLocaleDateString()}</td>
-                                    <td>${delivery.timeOfDelivery}</td>
-                                    <td>${delivery.invoiceNumber}</td>
-                                    <td>${delivery.numberOfTankers}</td>
-                                    <td>₹${delivery.totalCost}</td>
+                                    <th>Sr. No.</th>
+                                    
+                                    <th>Invoice Number</th>
+                                    <th>Number of Tankers</th>
+                                    <th>Total Cost</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-
-                    <!-- Total Information -->
-                    <div class="total-info">
-                        <p><strong>Total Number of Tankers for the Month:</strong> ${totalTankers}</p>
-                        <p><strong>Total Cost for the Month:</strong> ₹${totalCost}</p>
-                    </div>
-
-                    <!-- Bank Details -->
-                    <div class="bank-details">
-                        <div>
-                            <p><strong>Bank Name:</strong> XYZ Bank</p>
-                            <p><strong>Account Number:</strong> 1234567890</p>
+                            </thead>
+                            <tbody>
+                                ${report.deliveries.map((delivery, index) => {
+                                    // Format invoice numbers for display
+                                    let invoiceCell = delivery.invoiceNumber;
+                                    
+                                    // If there are multiple invoice numbers, format them properly
+                                    if (typeof delivery.invoiceNumber === 'string' && delivery.invoiceNumber.includes(',')) {
+                                        const invoiceNumbers = delivery.invoiceNumber.split(',').map(inv => inv.trim());
+                                        let formattedInvoices = '';
+                                        
+                                        // Group invoices, 5 per row
+                                        for (let i = 0; i < invoiceNumbers.length; i += 5) {
+                                            const chunk = invoiceNumbers.slice(i, i + 5);
+                                            formattedInvoices += chunk.join(', ');
+                                            if (i + 5 < invoiceNumbers.length) {
+                                                formattedInvoices += '<br>';
+                                            }
+                                        }
+                                        invoiceCell = formattedInvoices;
+                                    }
+                                    
+                                    return `
+                                    <tr>
+                                        <td>${index + 1}</td>
+                                      
+                                        <td>${invoiceCell}</td>
+                                        <td>${delivery.numberOfTankers}</td>
+                                        <td>₹${delivery.totalCost}</td>
+                                    </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+    
+                        <!-- Total Info -->
+                        <div class="total-info">
+                            <p><strong>Total Number of Tankers for the ${reportType === 'monthly' ? 'Month' : 'Week'}:</strong> ${totalTankers}</p>
+                            <p><strong>Total Cost for the ${reportType === 'monthly' ? 'Month' : 'Week'}:</strong> ₹${totalCost}</p>
                         </div>
-                        <div>
-                            <p><strong>IFSC Code:</strong> XYZ12345</p>
-                            <p><strong>Branch:</strong> City Branch</p>
+    
+                        <!-- Bank Details -->
+                        <div class="bank-details">
+                            <div>
+                                <p><strong>Bank Name:</strong> AXIS BANK LTD</p>
+                                <p><strong>Account Number:</strong> 913020040594304</p>
+                                <p><strong>GPay Number:</strong> +91 123-456-7890</p>
+                            </div>
+                            <div>
+                                <p><strong>IFSC Code:</strong> UTIB0001034</p>
+                                <p><strong>Branch:</strong> HINJEWADI</p>
+                            </div>
+                        </div>
+                        <div class="bank-details">
+                            <div></div>
+                            <div>
+                                <p><strong>Sign:</strong> </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </body>
-            </html>
-        `);
-        printWindow.document.close();
-        printWindow.print();
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        };
+    
+        // If the image fails to load, we can add a fallback or an alert here
+        img.onerror = () => {
+            console.error('Image failed to load');
+            // Optionally, handle the error by displaying a default image or alerting the user
+        };
     };
+    
 
     return (
         <div className="table-wrapper">
@@ -208,7 +314,6 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                         <th>Charge per Tanker</th>
                                         <th>Number of Tankers</th>
                                         <th>Total Cost</th>
-                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -277,7 +382,7 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                         <td>{report.totalTankers}</td>
                                         <td>₹{report.totalCost}</td>
                                         <td>
-                                            <button onClick={() => handlePrintReport(report)}>Print</button> {/* Print Button */}
+                                            <button onClick={() => handlePrintReport(report)}><Printer size={15}/></button> {/* Print Button */}
                                         </td>
                                     </tr>
                                     {expandedDeliveryId === report.buildingId && (
@@ -336,7 +441,7 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                         <td>{report.totalTankers}</td>
                                         <td>₹{report.totalCost}</td>
                                         <td>
-                                            <button onClick={() => handlePrintReport(report)}>Print</button> {/* Print Button */}
+                                            <button onClick={() => handlePrintReport(report)}><Printer size={15}/></button> {/* Print Button */}
                                         </td>
                                     </tr>
                                     {expandedDeliveryId === report.buildingId && (

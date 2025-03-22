@@ -85,6 +85,7 @@
   
   .toggle-password {
     margin-top: -7px;
+    margin-right: 6px;
     position: absolute;
     right: 1px;
     background: transparent;
@@ -95,7 +96,7 @@
   }
   
   .toggle-password:hover {
-    color: #3498db;
+    color: #000000;
   }
   
   .login-button {

@@ -113,8 +113,8 @@ const Monthly = () => {
             <body>
                 <div class="report-container">
                     <div class="company-header">
-                        <h1>Water Tank Supply Co.</h1>
-                        <p>123 Water Street, Mumbai, India</p>
+                        <h1>Shree Yogiraj Water Suppliers</h1>
+                        <p>Tathwade, Pune: 411033</p>
                     </div>
                     <div class="report-header">
                         <h2>Monthly Report</h2>

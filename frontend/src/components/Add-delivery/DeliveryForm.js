@@ -49,7 +49,7 @@ const DeliveryForm = () => {
         try {
             const deliveryData = {
                 ...formData,
-                date: formData.selectedDate ? formData.selectedDate : new Date().toISOString().split('T')[0], // Check selectedDate, if empty, use current date
+                date: formData.selectedDate ? formData.selectedDate : new Date().toISOString().split('T')[0], 
                 numberOfTankers: Number(formData.numberOfTankers),
             };
             await addDelivery(deliveryData);
@@ -134,7 +134,16 @@ const DeliveryForm = () => {
                         <label>Number of Tankers:</label>
                         <div className="input-wrapper">
                             <Droplets size={20} />
-                            <input type="number" name="numberOfTankers" value={formData.numberOfTankers} onChange={handleChange} placeholder="Enter Number of Tankers" required />
+                            <input 
+                                type="number" 
+                                name="numberOfTankers" 
+                                value={formData.numberOfTankers} 
+                                onChange={handleChange} 
+                                placeholder="Enter Number of Tankers" 
+                                min="0" 
+                                onWheel={(e) => e.target.blur()} 
+                                required 
+                            />
                         </div>
                     </div>
 

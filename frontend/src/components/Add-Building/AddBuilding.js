@@ -81,6 +81,8 @@ const AddBuilding = () => {
                                     value={priceInput}
                                     onChange={(e) => setPriceInput(e.target.value)}
                                     placeholder="Enter charge per tanker"
+                                    min="0" 
+                                    onWheel={(e) => e.target.blur()} 
                                 />
                             </div>
                             <button type="button" className="add-price-button" onClick={handleAddPrice}>

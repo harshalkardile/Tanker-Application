@@ -296,25 +296,9 @@ const Daily  = () => {
                     </div>
                 </div>
             </div>
-
-            <div class="payment-details">
-                <h2>Payment Information</h2>
-                <p>Please include invoice number with your payment</p>
-                <p>Bank: National Business Bank</p>
-                <p>Account Name: Atlas Corporation</p>
-                <p>Account Number: 1234567890</p>
-                <p>Routing Number: 987654321</p>
-                <p>SWIFT Code: ATLASUS12</p>
-            </div>
         </div>
-
-        <div class="footer">
-            <p>Thank you for your business. Payment is due within 30 days.</p>
-            <p>For any queries, please contact our accounts department.</p>
-        </div>
-           <footer>
-
-            </footer>
+        <footer>
+        </footer>
         </body>
         </html>
         `);
