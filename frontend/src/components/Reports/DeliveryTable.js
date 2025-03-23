@@ -78,13 +78,16 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                             margin-bottom: 10px;
                         }
                         .logo-title img {
+                            display: flex;
+                            align-items: left;
+                            justify-content: left;
                             margin-top:10px;
                             margin-right: 25px;
                             height: 80px;
                             width: auto;
                         }
                         .company-name {
-                            text-align: center;
+                            text-align: left;
                             font-size: 22px;
                             font-weight: bold;
                             color: #333;
@@ -154,6 +157,9 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                             font-size: 12px;
                             background-color: #fafafa;
                         }
+                        .invoice-number-cell {
+                            line-height: 1.5;
+                        }
                         .total-info {
                             text-align: right;
                             font-size: 13px;
@@ -187,7 +193,7 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                         <!-- Company Logo and Name -->
                         <div class="logo-title">
                             <img src="${imgUrl}" alt="Dnyaneshwar Maharaj" />
-                            <div>
+                            <div class="company-details">
                                 <div class="company-name">
                                     <p>Shree Yogiraj Water Supplier</p>
                                 </div>
@@ -195,13 +201,14 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                     <p>Sr. No. - 140/1 Tathawade Dist Pune - 411033</p>
                                 </div>
                             </div>
+                            <div></div>
                         </div>
-    
+        
                         <!-- Report Type (Monthly/Weekly) -->
                         <div class="report-title">
                             <p>${reportType === 'monthly' ? 'Monthly Report' : 'Weekly Report'}</p>
                         </div>
-    
+        
                         <!-- Invoice Header -->
                         <div class="invoice-header">
                             <div>
@@ -212,58 +219,60 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                 <p><strong>Issue Date:</strong> ${new Date(issueDate).toLocaleDateString('en-IN')}</p>
                             </div>
                         </div>
-    
+        
                         <!-- Delivery Table -->
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Sr. No.</th>
-                                    
-                                    <th>Invoice Number</th>
-                                    <th>Number of Tankers</th>
-                                    <th>Total Cost</th>
+                                    <th style="width: 10%">Sr. No.</th>
+                                    <th style="width: 60%">Invoice Number</th>
+                                    <th style="width: 20%">Number of Tankers</th>
+                                    <th style="width: 15% ">Total Cost</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 ${report.deliveries.map((delivery, index) => {
                                     // Format invoice numbers for display
-                                    let invoiceCell = delivery.invoiceNumber;
+                                    let invoiceCell = '';
                                     
-                                    // If there are multiple invoice numbers, format them properly
-                                    if (typeof delivery.invoiceNumber === 'string' && delivery.invoiceNumber.includes(',')) {
-                                        const invoiceNumbers = delivery.invoiceNumber.split(',').map(inv => inv.trim());
-                                        let formattedInvoices = '';
+                                    // Check if the invoice number contains slash separators
+                                    if (typeof delivery.invoiceNumber === 'string' && delivery.invoiceNumber.includes(' ')) {
+                                        // Split by slash and trim each invoice number
+                                        const invoiceNumbers = delivery.invoiceNumber.split(' ').map(inv => inv.trim());
                                         
-                                        // Group invoices, 5 per row
+                                        // Group invoices into rows of exactly 5 per row
                                         for (let i = 0; i < invoiceNumbers.length; i += 5) {
                                             const chunk = invoiceNumbers.slice(i, i + 5);
-                                            formattedInvoices += chunk.join(', ');
+                                            // Join the chunk with commas
+                                            invoiceCell += chunk.join(', ');
+                                            // Add line break if not the last row
                                             if (i + 5 < invoiceNumbers.length) {
-                                                formattedInvoices += '<br>';
+                                                invoiceCell += '<br>';
                                             }
                                         }
-                                        invoiceCell = formattedInvoices;
+                                    } else {
+                                        // If no slashes, display the invoice number as is
+                                        invoiceCell = delivery.invoiceNumber;
                                     }
                                     
                                     return `
                                     <tr>
-                                        <td>${index + 1}</td>
-                                      
-                                        <td>${invoiceCell}</td>
-                                        <td>${delivery.numberOfTankers}</td>
-                                        <td>₹${delivery.totalCost}</td>
+                                        <td style="text-align: center">${index + 1}</td>
+                                        <td class="invoice-number-cell">${invoiceCell}</td>
+                                        <td style="text-align: center">${delivery.numberOfTankers}</td>
+                                        <td style="text-align: center">₹${delivery.totalCost}</td>
                                     </tr>
                                     `;
                                 }).join('')}
                             </tbody>
                         </table>
-    
+        
                         <!-- Total Info -->
                         <div class="total-info">
                             <p><strong>Total Number of Tankers for the ${reportType === 'monthly' ? 'Month' : 'Week'}:</strong> ${totalTankers}</p>
                             <p><strong>Total Cost for the ${reportType === 'monthly' ? 'Month' : 'Week'}:</strong> ₹${totalCost}</p>
                         </div>
-    
+        
                         <!-- Bank Details -->
                         <div class="bank-details">
                             <div>

@@ -1,12 +1,13 @@
 .login-container {
     width: 100%;
-    max-width: 370px;
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    max-width: 350px;
+    background: linear-gradient(145deg, #c2f7cb 0%, #e5e8eb 100%);
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
     margin: auto;
+    margin-left: 400px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
