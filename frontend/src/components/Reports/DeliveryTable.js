@@ -76,29 +76,35 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                             align-items: center;
                             justify-content: center;
                             margin-bottom: 10px;
+                            gap: 50px;  
+                            border-bottom: 2px solid #ddd;
                         }
                         .logo-title img {
                             display: flex;
-                            align-items: left;
+                            align-items: baseline;
                             justify-content: left;
-                            margin-top:10px;
-                            margin-right: 25px;
+                            margin-top: 10px;
+                            padding-right: 100px;
                             height: 80px;
                             width: auto;
                         }
                         .company-name {
+                            font-family: 'Brush Script MT', cursive;
                             text-align: left;
-                            font-size: 22px;
+                            font-size: 24px;
                             font-weight: bold;
                             color: #333;
+                            margin-left: -50px;
                             margin-bottom: 2px;
                         }
                         .company-address {
                             text-align: center;
-                            margin-right: 18px;
+                            font-family: 'Brush Script MT', cursive;
+                            margin-right: 20px;
                             font-size: 12px;
                             color: #555;
-                            margin-top:-10px;
+                            margin-left: -50px;
+                            margin-top: -10px;
                             margin-bottom: 10px;
                         }
                         .report-title {
@@ -166,6 +172,7 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                             font-weight: bold;
                             color: #333;
                             margin-top: 15px;
+                            margin-right: 20px;
                             border-top: 2px solid #ddd;
                             padding-top: 10px;
                         }
@@ -198,16 +205,16 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                     <p>Shree Yogiraj Water Supplier</p>
                                 </div>
                                 <div class="company-address">
-                                    <p>Sr. No. - 140/1 Tathawade Dist Pune - 411033</p>
+                                    <p>Sr. No. - 140/1 Tathawade Dist Pune - 411033<br> Ph. 9822500095/8055859500</p>
                                 </div>
                             </div>
                             <div></div>
                         </div>
         
-                        <!-- Report Type (Monthly/Weekly) -->
-                        <div class="report-title">
-                            <p>${reportType === 'monthly' ? 'Monthly Report' : 'Weekly Report'}</p>
-                        </div>
+                        <!-- Report Type (Monthly/Weekly) 
+                         <!-- <div class="report-title">
+                             <p>${reportType === 'monthly' ? 'Monthly Report' : 'Weekly Report'}</p>
+                         </div>-->
         
                         <!-- Invoice Header -->
                         <div class="invoice-header">
@@ -226,7 +233,7 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                                 <tr>
                                     <th style="width: 10%">Sr. No.</th>
                                     <th style="width: 60%">Invoice Number</th>
-                                    <th style="width: 20%">Number of Tankers</th>
+                                    <th style="width: 15%">Number of Tankers</th>
                                     <th style="width: 15% ">Total Cost</th>
                                 </tr>
                             </thead>
@@ -278,7 +285,7 @@ const DeliveryTable = ({ deliveries, toggleExpand, expandedDeliveryId, reportTyp
                             <div>
                                 <p><strong>Bank Name:</strong> AXIS BANK LTD</p>
                                 <p><strong>Account Number:</strong> 913020040594304</p>
-                                <p><strong>GPay Number:</strong> +91 123-456-7890</p>
+                                <p><strong>GPay Number:</strong> +91 80558 59500</p>
                             </div>
                             <div>
                                 <p><strong>IFSC Code:</strong> UTIB0001034</p>

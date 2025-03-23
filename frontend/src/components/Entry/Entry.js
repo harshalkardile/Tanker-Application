@@ -104,7 +104,7 @@ const Entry = () => {
                   className="login-button"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Logging in...' : 'Login'}
+                  {isSubmitting ? 'Signing in...' : 'Sign In'}
                 </button>
               </form>
             </div>
